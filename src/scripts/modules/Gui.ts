@@ -15,19 +15,20 @@ type Color = {
 export default class Gui {
     private readonly options?: Options;
     private readonly fps?: EssentialsPlugin.FpsGraphBladeApi;
+    private readonly pane: Pane;
 
     /**
      * @constructor
      */
     constructor(options?: Options) {
         this.options = options;
+        this.pane = new Pane();
 
         if (!this.options) return;
 
-        const pane = new Pane();
-        pane.registerPlugin(EssentialsPlugin);
+        this.pane.registerPlugin(EssentialsPlugin);
 
-        pane.addBinding(this.options, 'timeScale', {
+        this.pane.addBinding(this.options, 'timeScale', {
             min: 0.0,
             max: 2.0,
         }).on('change', (v) => {
@@ -36,9 +37,9 @@ export default class Gui {
             }
         });
 
-        pane.addBinding(this.options, 'isHoge');
+        this.pane.addBinding(this.options, 'isHoge');
 
-        this.fps = pane.addBlade({
+        this.fps = this.pane.addBlade({
             view: 'fpsgraph',
         }) as EssentialsPlugin.FpsGraphBladeApi;
     }
@@ -58,5 +59,12 @@ export default class Gui {
      */
     update() {
         this.updateFps();
+    }
+
+    /**
+     * # クリーンアップ処理
+     */
+    dispose() {
+        this.pane.dispose();
     }
 }
