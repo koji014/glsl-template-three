@@ -4,8 +4,8 @@ import * as THREE from 'three';
 import Common from './Common';
 import Pointer from './Pointer';
 import Gui, { type Options } from './Gui';
-import base_vert from '../../shaders/vert/base.vert?raw';
-import output_frag from '../../shaders/frag/output.frag?raw';
+import base_vert from '../../shaders/vert/base.vert';
+import output_frag from '../../shaders/frag/output.frag';
 
 export default class Output {
     private readonly scene: THREE.Scene;
