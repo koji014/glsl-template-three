@@ -5,9 +5,9 @@ import ThreeApp from './modules/ThreeApp';
 window.addEventListener(
     'DOMContentLoaded',
     () => {
-        const wrapper = document.querySelector('#webgl');
+        const wrapper = document.querySelector<HTMLElement>('#webgl');
 
-        if (!(wrapper instanceof HTMLElement)) {
+        if (!wrapper) {
             console.error('Failed to find a valid element with the ID "webgl".');
             return;
         }
